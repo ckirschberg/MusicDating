@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MusicDating 
+namespace MusicDating.Models.Entities 
 {
     public class Instrument 
     {
