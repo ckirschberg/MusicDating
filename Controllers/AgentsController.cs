@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MusicDating.Data;
 using MusicDating.Models.Entities;
+using MusicDating.Models.ViewModels;
 
 namespace MusicDating.Controllers
 {
@@ -48,7 +49,15 @@ namespace MusicDating.Controllers
         // GET: Agents/Create
         public IActionResult Create()
         {
-            ViewData["InstrumentId"] = new SelectList(_context.Instruments, "InstrumentId", "Name");
+            var model = new AgentInstrumentVm();
+
+            var selectListItems = _context.Instruments.Select(
+                x => new SelectListItem(){ Value = x.InstrumentId.ToString(), Text = x.Name }).ToList();
+
+
+            model.Instruments = selectListItems;
+
+            //ViewData["InstrumentId"] = new SelectList(_context.Instruments, "InstrumentId", "Name");
             return View();
         }
 
