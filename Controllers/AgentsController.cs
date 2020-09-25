@@ -51,14 +51,11 @@ namespace MusicDating.Controllers
         {
             var model = new AgentInstrumentVm();
 
-            var selectListItems = _context.Instruments.Select(
-                x => new SelectListItem(){ Value = x.InstrumentId.ToString(), Text = x.Name }).ToList();
-
-
+            var selectListItems = new SelectList(_context.Instruments, "InstrumentId", "Name");
             model.Instruments = selectListItems;
 
             //ViewData["InstrumentId"] = new SelectList(_context.Instruments, "InstrumentId", "Name");
-            return View();
+            return View(model);
         }
 
         // POST: Agents/Create
