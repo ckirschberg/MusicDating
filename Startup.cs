@@ -32,7 +32,7 @@ namespace MusicDating
                     Configuration.GetConnectionString("ApplicationDbContext")));
             
             services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders()
                 .AddDefaultUI();
 
             services.AddControllersWithViews();
