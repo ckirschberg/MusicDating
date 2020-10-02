@@ -14397,6 +14397,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Views/Agents/Index.cshtml",
       "TargetPath": "Views\\Agents\\Index.cshtml",
       "FileKind": "mvc"
@@ -14412,6 +14422,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/Account/Register.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/Account/Logout.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Logout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Views/Instruments/Index.cshtml",
       "TargetPath": "Views\\Instruments\\Index.cshtml",
       "FileKind": "mvc"
@@ -14424,6 +14444,11 @@
     {
       "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Views/Instruments/Details.cshtml",
       "TargetPath": "Views\\Instruments\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/Account/_ViewImports.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -14484,6 +14509,11 @@
     {
       "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/Account/Login.cshtml",
+      "TargetPath": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
       "FileKind": "mvc"
     }
   ],
