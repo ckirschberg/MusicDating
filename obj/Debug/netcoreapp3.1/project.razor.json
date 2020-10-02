@@ -14402,6 +14402,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Views/Instruments/_CreateEdit.cshtml",
+      "TargetPath": "Views\\Instruments\\_CreateEdit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/christiankirschberg/repos/school/MusicDating/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
