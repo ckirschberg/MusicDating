@@ -17,6 +17,32 @@ namespace MusicDating.Data
         {
             base.OnModelCreating(modelBuilder);
             
+            modelBuilder.Entity<Genre>().HasData(
+                new Genre
+                {
+                    GenreId = 1,
+                    Name = "Classical"
+                },
+                new Genre
+                {
+                    GenreId = 2,
+                    Name = "Rock"
+                }
+            );
+            modelBuilder.Entity<Ensemble>().HasData(
+                new Ensemble { EnsembleId = 1, Name = "Ensemble 1" },
+                new Ensemble { EnsembleId = 2, Name = "Ensemble 2" },
+                new Ensemble { EnsembleId = 3, Name = "Ensemble 3" }
+            );
+
+
+            modelBuilder.Entity<GenreEnsemble>().HasData(
+                new GenreEnsemble { EnsembleId = 1, GenreId = 1 },
+                new GenreEnsemble { EnsembleId = 2, GenreId = 1 },
+                new GenreEnsemble { EnsembleId = 1, GenreId = 2 }
+            );
+
+
             modelBuilder.Entity<GenreEnsemble>()
                 .HasKey(bc => new { bc.GenreId, bc.EnsembleId });  
             modelBuilder.Entity<GenreEnsemble>()
