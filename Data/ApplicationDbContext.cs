@@ -15,31 +15,29 @@ namespace MusicDating.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder); // Only needed when inheriting from IdentityDbContext.
+            // Call base functionality from the OnModelCreating method in the IdentityDbContext class.
             
-            modelBuilder.Entity<Genre>().HasData(
-                new Genre
-                {
-                    GenreId = 1,
-                    Name = "Classical"
-                },
-                new Genre
-                {
-                    GenreId = 2,
-                    Name = "Rock"
-                }
-            );
-            modelBuilder.Entity<Ensemble>().HasData(
-                new Ensemble { EnsembleId = 1, Name = "Ensemble 1" },
-                new Ensemble { EnsembleId = 2, Name = "Ensemble 2" },
-                new Ensemble { EnsembleId = 3, Name = "Ensemble 3" }
+            modelBuilder.Entity<ApplicationUser>().HasData(
+                new ApplicationUser { DateCreated = new System.DateTime(2020, 12, 24), FirstName = "Daniel", LastName = "Something", UserName = "daniel@daniel.dk", Email="daniel@daniel.dk" },
+                new ApplicationUser { DateCreated = new System.DateTime(2020, 10, 22), FirstName = "Simone", LastName = "Something else", UserName = "simone@simone.dk", Email="simone@simone.dk"  }
             );
 
+
+            modelBuilder.Entity<Genre>().HasData(
+                new Genre { GenreId = 1, Name = "Classical" },
+                new Genre { GenreId = 2, Name = "Rock" }
+            );
+            modelBuilder.Entity<Ensemble>().HasData(
+                new Ensemble { EnsembleId = 1, Name = "Spice Girls" },
+                new Ensemble { EnsembleId = 2, Name = "U2" },
+                new Ensemble { EnsembleId = 3, Name = "3 doors down" }
+            );
 
             modelBuilder.Entity<GenreEnsemble>().HasData(
                 new GenreEnsemble { EnsembleId = 1, GenreId = 1 },
-                new GenreEnsemble { EnsembleId = 2, GenreId = 1 },
-                new GenreEnsemble { EnsembleId = 1, GenreId = 2 }
+                new GenreEnsemble { EnsembleId = 1, GenreId = 2 },
+                new GenreEnsemble { EnsembleId = 2, GenreId = 1 }
             );
 
 
