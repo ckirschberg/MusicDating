@@ -13,6 +13,19 @@ namespace MusicDating.Data
             : base(options)
         {
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<GenreEnsemble>()
+                .HasKey(bc => new { bc.GenreId, bc.EnsembleId });  
+            modelBuilder.Entity<GenreEnsemble>()
+                .HasOne(bc => bc.Ensemble)
+                .WithMany(b => b.GenreEnsembles)
+                .HasForeignKey(bc => bc.EnsembleId);  
+            modelBuilder.Entity<GenreEnsemble>()
+                .HasOne(bc => bc.Genre)
+                .WithMany(c => c.GenreEnsembles)
+                .HasForeignKey(bc => bc.GenreId);
+        }
 
         // This means that EF (Entity Framework) will create a table called Instrument based
         // on our Instrument class.
@@ -21,5 +34,7 @@ namespace MusicDating.Data
         // This means that EF (Entity Framework) will create a table called Instrument based
         // on our Instrument class.
         public DbSet<MusicDating.Models.Entities.Agent> Agent { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Ensemble> Ensemble { get; set; }
     }
 }
