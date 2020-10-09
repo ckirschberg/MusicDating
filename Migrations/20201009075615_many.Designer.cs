@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicDating.Data;
 
 namespace MusicDating.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201009075615_many")]
+    partial class many
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,55 +238,6 @@ namespace MusicDating.Migrations
                     b.ToTable("Agent");
                 });
 
-            modelBuilder.Entity("MusicDating.Models.Entities.Ensemble", b =>
-                {
-                    b.Property<int>("EnsembleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CoverImage")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("EnsembleId");
-
-                    b.ToTable("Ensemble");
-                });
-
-            modelBuilder.Entity("MusicDating.Models.Entities.Genre", b =>
-                {
-                    b.Property<int>("GenreId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("GenreId");
-
-                    b.ToTable("Genres");
-                });
-
-            modelBuilder.Entity("MusicDating.Models.Entities.GenreEnsemble", b =>
-                {
-                    b.Property<int>("GenreId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("EnsembleId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("GenreId", "EnsembleId");
-
-                    b.HasIndex("EnsembleId");
-
-                    b.ToTable("GenreEnsemble");
-                });
-
             modelBuilder.Entity("MusicDating.Models.Entities.Instrument", b =>
                 {
                     b.Property<int>("InstrumentId")
@@ -356,21 +309,6 @@ namespace MusicDating.Migrations
                     b.HasOne("MusicDating.Models.Entities.Instrument", "Instrument")
                         .WithMany("Agents")
                         .HasForeignKey("InstrumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("MusicDating.Models.Entities.GenreEnsemble", b =>
-                {
-                    b.HasOne("MusicDating.Models.Entities.Ensemble", "Ensemble")
-                        .WithMany("GenreEnsembles")
-                        .HasForeignKey("EnsembleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MusicDating.Models.Entities.Genre", "Genre")
-                        .WithMany("GenreEnsembles")
-                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

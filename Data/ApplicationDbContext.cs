@@ -15,6 +15,8 @@ namespace MusicDating.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<GenreEnsemble>()
                 .HasKey(bc => new { bc.GenreId, bc.EnsembleId });  
             modelBuilder.Entity<GenreEnsemble>()
