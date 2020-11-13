@@ -62,5 +62,6 @@ namespace MusicDating.Data
         public DbSet<MusicDating.Models.Entities.Agent> Agent { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Ensemble> Ensemble { get; set; }
+        //public DbSet< MyProperty { get; set; }
     }
 }
