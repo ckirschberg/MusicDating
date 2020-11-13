@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MusicDating.Data;
 
 namespace MusicDating.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201113122332_userinstruments")]
+    partial class userinstruments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,9 +93,9 @@ namespace MusicDating.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1",
+                            Id = "bc12a777-0aed-4c54-8b15-75c478937bf4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "129814ff-40ba-4dde-a09f-e5c4a463624d",
+                            ConcurrencyStamp = "820fad0e-adee-4977-840d-3aede56c10ec",
                             DateCreated = new DateTime(2020, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "daniel@daniel.dk",
                             EmailConfirmed = false,
@@ -101,15 +103,15 @@ namespace MusicDating.Migrations
                             LastName = "Something",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a9169e85-4392-4b12-b70b-ace7ea5c50b0",
+                            SecurityStamp = "9f5eb2ca-30a2-4982-a9c2-2d4609ae7bfa",
                             TwoFactorEnabled = false,
                             UserName = "daniel@daniel.dk"
                         },
                         new
                         {
-                            Id = "2",
+                            Id = "6e2ef46b-5927-48d4-ba4f-95f34e8a0dcb",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22d51e8f-9dce-483b-aedd-924b15f819f2",
+                            ConcurrencyStamp = "9b13cafa-8a02-4321-b496-b892475d099c",
                             DateCreated = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "simone@simone.dk",
                             EmailConfirmed = false,
@@ -117,7 +119,7 @@ namespace MusicDating.Migrations
                             LastName = "Something else",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "95468be8-1fe1-40b7-8313-7689c1d35c29",
+                            SecurityStamp = "038c10e3-b96c-48c8-a4f7-c2caed1b7d10",
                             TwoFactorEnabled = false,
                             UserName = "simone@simone.dk"
                         });
@@ -378,23 +380,6 @@ namespace MusicDating.Migrations
                     b.HasKey("InstrumentId");
 
                     b.ToTable("Instruments");
-
-                    b.HasData(
-                        new
-                        {
-                            InstrumentId = 7,
-                            Name = "Violin"
-                        },
-                        new
-                        {
-                            InstrumentId = 8,
-                            Name = "Guitar"
-                        },
-                        new
-                        {
-                            InstrumentId = 9,
-                            Name = "Piano"
-                        });
                 });
 
             modelBuilder.Entity("MusicDating.Models.Entities.UserInstrument", b =>
@@ -413,26 +398,6 @@ namespace MusicDating.Migrations
                     b.HasIndex("InstrumentId");
 
                     b.ToTable("UserInstruments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "1",
-                            InstrumentId = 7,
-                            Level = 3
-                        },
-                        new
-                        {
-                            Id = "1",
-                            InstrumentId = 8,
-                            Level = 5
-                        },
-                        new
-                        {
-                            Id = "1",
-                            InstrumentId = 9,
-                            Level = 2
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
