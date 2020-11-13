@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MusicDating.Models;
+using MusicDating.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MusicDating.Controllers
 {
@@ -21,10 +23,16 @@ namespace MusicDating.Controllers
 
         public async Task<IActionResult> Index(string instrumentName)
         {
+            //create a view model selectlist with instruments + userInstruments (users)
+
             // do some coding - filter users to only display those that play the instrument
+            var users = from x in _context.UserInstruments.Include(x => x.Instrument).Include(x=>x.ApplicationUser)
+                        select x;
 
 
-            return View(data);
+
+            
+            return View(await users.ToListAsync());
         }
 
     }
