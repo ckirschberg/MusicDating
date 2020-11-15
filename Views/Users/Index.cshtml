@@ -1,4 +1,5 @@
-@model IEnumerable<MusicDating.Models.Entities.UserInstrument>
+@using MusicDating.Models.ViewModels;
+@model UserInstrumentVm
 
 @{
     ViewData["Title"] = "Index";
@@ -15,13 +16,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ApplicationUser.FirstName)
+                First Name
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @using (Html.BeginForm("Index", "Users", FormMethod.Post))
+        {
+            <div class="form-group">
+                <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()"></select>
+            </div>
+        }
+
+        @foreach (var item in Model.UserInstruments) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
@@ -34,6 +42,6 @@
                 <a asp-action="Delete" asp-route-id="@item.InstrumentId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

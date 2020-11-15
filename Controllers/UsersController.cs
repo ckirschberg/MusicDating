@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using MusicDating.Models;
 using MusicDating.Data;
 using Microsoft.EntityFrameworkCore;
+using MusicDating.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MusicDating.Controllers
 {
@@ -29,11 +31,19 @@ namespace MusicDating.Controllers
             var users = from x in _context.UserInstruments.Include(x => x.Instrument).Include(x=>x.ApplicationUser)
                         select x;
 
-
-
+            if (!String.IsNullOrEmpty(instrumentName)) {
+                users = users.Where(x => x.Instrument.Name == instrumentName);
+            }
+        
+            var inst = await _context.Instruments.ToListAsync();
+            inst.Insert(0, new Models.Entities.Instrument() {Name = ""});
+            var vm = new UserInstrumentVm() {
+                UserInstruments = await users.ToListAsync(),
+                Instruments = new SelectList(inst, "Name", "Name"),
+                InstrumentName = instrumentName
+            };
             
-            return View(await users.ToListAsync());
+            return View(vm);
         }
-
     }
 }
