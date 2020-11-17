@@ -27,6 +27,8 @@ namespace MusicDating.Controllers
         {
             //create a view model selectlist with instruments + userInstruments (users)
 
+            // I am showing all instruments in the database. Some of you found (only) the instruments that are in use by musicians.
+            
             // do some coding - filter users to only display those that play the instrument
             var users = from x in _context.UserInstruments.Include(x => x.Instrument).Include(x=>x.ApplicationUser)
                         select x;
@@ -35,11 +37,10 @@ namespace MusicDating.Controllers
                 users = users.Where(x => x.Instrument.Name == instrumentName);
             }
         
-            var inst = await _context.Instruments.ToListAsync();
-            inst.Insert(0, new Models.Entities.Instrument() {Name = ""});
+    
             var vm = new UserInstrumentVm() {
                 UserInstruments = await users.ToListAsync(),
-                Instruments = new SelectList(inst, "Name", "Name"),
+                Instruments = new SelectList(await _context.Instruments.ToListAsync(), "Name", "Name"),
                 InstrumentName = instrumentName
             };
             

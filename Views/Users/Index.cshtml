@@ -25,7 +25,9 @@
         @using (Html.BeginForm("Index", "Users", FormMethod.Post))
         {
             <div class="form-group">
-                <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()"></select>
+                <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()">
+                    <option value="">Select instrument</option>
+                </select>
             </div>
         }
 
