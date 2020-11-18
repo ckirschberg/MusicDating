@@ -12,38 +12,38 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                First Name
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @using (Html.BeginForm("Index", "Users", FormMethod.Post))
-        {
-            <div class="form-group">
-                <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()">
-                    <option value="">Select instrument</option>
-                </select>
-            </div>
-        }
 
-        @foreach (var item in Model.UserInstruments) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
-                @Html.DisplayFor(modelItem => item.Instrument.Name)
-                @Html.DisplayFor(modelItem => item.Level)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.InstrumentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.InstrumentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.InstrumentId">Delete</a>
-            </td>
-        </tr>
+@using (Html.BeginForm("Index", "Users", FormMethod.Post))
+{
+<div class="form-group">
+    <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()">
+        <option value="">Select instrument</option>
+    </select>
+</div>
+}
+
+
+<div class="container">
+    <div class="row">
+@foreach (var item in Model.UserInstruments) {
+        <div class="card col col-12 col-md-6">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title">
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
+                    </h5>
+                    <a href="#" class="btn btn-secondary">Vis profil</a>
+                </div>
+                <div class="card-text d-flex justify-content-between">
+                    <h5 class="">@Html.DisplayFor(modelItem => item.Instrument.Name)</h5>
+                    <div class="">
+                        <div>
+                            <h6>Erfaring <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.Level)</span></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>           
         }
-    </tbody>
-</table>
+    </div>       
+</div>       
