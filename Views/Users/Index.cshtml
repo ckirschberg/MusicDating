@@ -30,12 +30,12 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">
-                        @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
+                        @item.ApplicationUser.FirstName @item.ApplicationUser.LastName
                     </h5>
                     <a href="#" class="btn btn-secondary">Vis profil</a>
                 </div>
                 <div class="card-text d-flex justify-content-between">
-                    <h5 class="">@Html.DisplayFor(modelItem => item.Instrument.Name)</h5>
+                    <h5 class="">@item.Instrument.Name)</h5>
                     <div class="">
                         <div>
                             <h6>Erfaring <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.Level)</span></h6>
