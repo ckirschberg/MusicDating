@@ -12,7 +12,7 @@ namespace MusicDating.Models.Entities
         public Instrument Instrument { get; set; }
     
         public int Level { get; set; }
-        
+
+        public ICollection<UserInstrumentGenre> UserInstrumentsGenres { get; set; }   
     }
-    
 }

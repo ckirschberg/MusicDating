@@ -23,25 +23,38 @@ namespace MusicDating.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string instrumentName)
+        public async Task<IActionResult> Index(string instrumentName, string genreName)
         {
             //create a view model selectlist with instruments + userInstruments (users)
 
             // I am showing all instruments in the database. Some of you found (only) the instruments that are in use by musicians.
-            
+
+            // Get all genres in use by userinstruments
+            var genreQuery = from x in _context.UserInstrumentGenres.Include(x=>x.Genre)
+                        select x.Genre;
+
             // do some coding - filter users to only display those that play the instrument
-            var users = from x in _context.UserInstruments.Include(x => x.Instrument).Include(x=>x.ApplicationUser)
+            var users = from x in _context.UserInstruments.Include(x=>x.UserInstrumentsGenres).ThenInclude(y=>y.Genre)
+                .Include(x => x.Instrument).Include(x=>x.ApplicationUser)
                         select x;
 
             if (!String.IsNullOrEmpty(instrumentName)) {
                 users = users.Where(x => x.Instrument.Name == instrumentName);
             }
+            if(!String.IsNullOrEmpty(genreName)){
+                users = from u in users
+                        from g in u.UserInstrumentsGenres
+                        where g.Genre.Name == genreName
+                        select u;
+            }
         
     
             var vm = new UserInstrumentVm() {
                 UserInstruments = await users.ToListAsync(),
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync(), "Name", "Name"),
                 Instruments = new SelectList(await _context.Instruments.ToListAsync(), "Name", "Name"),
-                InstrumentName = instrumentName
+                InstrumentName = instrumentName,
+                GenreName = genreName
             };
             
             return View(vm);
