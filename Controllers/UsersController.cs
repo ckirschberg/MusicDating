@@ -23,7 +23,7 @@ namespace MusicDating.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string instrumentName, string genreName)
+        public async Task<IActionResult> Index(string instrumentName, int genreId)
         {
             //create a view model selectlist with instruments + userInstruments (users)
 
@@ -34,23 +34,31 @@ namespace MusicDating.Controllers
                         select x.Genre;
 
             // do some coding - filter users to only display those that play the instrument
-            var users = from x in _context.UserInstruments.Include(x=>x.UserInstrumentsGenres).ThenInclude(y=>y.Genre)
-                .Include(x => x.Instrument).Include(x=>x.ApplicationUser)
+            var users = from x in _context.ApplicationUsers.Include(x=>x.UserInstruments)
+                        .ThenInclude(y=>y.UserInstrumentsGenres).ThenInclude(y=>y.Genre)
+                        .Include(y=>y.UserInstruments).ThenInclude(x => x.Instrument)
                         select x;
 
+
+
+
             if (!String.IsNullOrEmpty(instrumentName)) {
-                users = users.Where(x => x.Instrument.Name == instrumentName);
-            }
-            if(!String.IsNullOrEmpty(genreName)){
                 users = from u in users
-                        from g in u.UserInstrumentsGenres
-                        where g.Genre.Name == genreName
+                        from g in u.UserInstruments
+                        where g.Instrument.Name == instrumentName
+                        select u;
+            }
+            if(genreId != 0){
+                users = from u in users
+                        from g in u.UserInstruments
+                        from ge in g.UserInstrumentsGenres
+                        where ge.GenreId == genreId
                         select u;
             }
         
     
             var vm = new UserInstrumentVm() {
-                UserInstruments = await users.ToListAsync(),
+                ApplicationUsers = await users.ToListAsync(),
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync(), "Name", "Name"),
                 Instruments = new SelectList(await _context.Instruments.ToListAsync(), "Name", "Name"),
                 InstrumentName = instrumentName,
