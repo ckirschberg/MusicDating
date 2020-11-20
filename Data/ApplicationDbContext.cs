@@ -103,5 +103,7 @@ namespace MusicDating.Data
         public DbSet<Ensemble> Ensemble { get; set; }
         public DbSet<UserInstrument> UserInstruments { get; set; }
         public DbSet<UserInstrumentGenre> UserInstrumentGenres { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

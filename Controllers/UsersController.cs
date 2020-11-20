@@ -23,7 +23,7 @@ namespace MusicDating.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index(string instrumentName)
+        public async Task<IActionResult> Index(string instrumentName, int genreId)
         {
             //create a view model selectlist with instruments + userInstruments (users)
 
@@ -33,6 +33,10 @@ namespace MusicDating.Controllers
             var users = from x in _context.UserInstruments.Include(x => x.Instrument).Include(x=>x.ApplicationUser)
                         select x;
 
+            var genres = from x in _context.UserInstrumentGenres.Include(y=>y.Genre)
+                         select x.Genre;
+            
+
             if (!String.IsNullOrEmpty(instrumentName)) {
                 users = users.Where(x => x.Instrument.Name == instrumentName);
             }
@@ -40,8 +44,10 @@ namespace MusicDating.Controllers
     
             var vm = new UserInstrumentVm() {
                 UserInstruments = await users.ToListAsync(),
+                Genres = new SelectList(await genres.Distinct().ToListAsync(), "GenreId", "Name"),
                 Instruments = new SelectList(await _context.Instruments.ToListAsync(), "Name", "Name"),
-                InstrumentName = instrumentName
+                InstrumentName = instrumentName,
+                GenreId = genreId
             };
             
             return View(vm);
