@@ -50,7 +50,7 @@ namespace MusicDating.Controllers
             }
             if(genreId != 0){
                 users = from u in users
-                        from g in u.UserInstruments
+                        from g in u.UserInstruments 
                         from ge in g.UserInstrumentsGenres
                         where ge.GenreId == genreId
                         select u;
@@ -59,10 +59,10 @@ namespace MusicDating.Controllers
     
             var vm = new UserInstrumentVm() {
                 ApplicationUsers = await users.ToListAsync(),
-                Genres = new SelectList(await genreQuery.Distinct().ToListAsync(), "Name", "Name"),
+                Genres = new SelectList(await genreQuery.Distinct().ToListAsync(), "GenreId", "Name"),
                 Instruments = new SelectList(await _context.Instruments.ToListAsync(), "Name", "Name"),
                 InstrumentName = instrumentName,
-                GenreName = genreName
+                GenreId = genreId
             };
             
             return View(vm);

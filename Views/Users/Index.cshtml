@@ -18,7 +18,7 @@
     </select>
 </div>
 <div class="form-group">
-    <select asp-for="GenreName" class ="form-control" asp-items="Model.Genres" onchange="this.form.submit()">
+    <select asp-for="GenreId" class ="form-control" asp-items="Model.Genres" onchange="this.form.submit()">
         <option value="">Select genre</option>
     </select>
 </div>
@@ -28,30 +28,32 @@
 
 <div class="container pre-scrollable"> 
     <div class="row">
-        @foreach (var item in Model.UserInstruments) {
+        @foreach (var item in Model.ApplicationUsers) {
         <div class="card col col-12 col-md-6">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">
-                        @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName) @Html.DisplayFor(modelItem => item.ApplicationUser.LastName)
+                        @item.FirstName @item.LastName
                     </h5>
                     <a href="#" class="btn btn-secondary">Vis profil</a>
                 </div>
                 <div class="card-text">
+                    @foreach (var userInstrument in item.UserInstruments){
                     <div class="d-flex justify-content-between">
-                        <h5 class="">@Html.DisplayFor(modelItem => item.Instrument.Name)</h5>
+                        <h5 class="">@userInstrument.Instrument.Name</h5>
                         <div class="">
                             <div>
-                                <h6>Erfaring <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.Level)</span></h6>
+                                <h6>Erfaring <span class="badge badge-primary">@userInstrument.Level</span></h6>
                             </div>
                         </div>
                     </div>
                     <div>
-                        @foreach (var genre in item.UserInstrumentsGenres)
+                        @foreach (var genre in userInstrument.UserInstrumentsGenres)
                         {
                             <span class="badge badge-secondary">@genre.Genre.Name</span>
                         }
                     </div>
+                    }
                 </div>
             </div>
         </div>           
