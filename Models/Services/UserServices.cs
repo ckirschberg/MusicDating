@@ -16,7 +16,8 @@ namespace MusicDating.Models.Services
     public class UserServices {
         public async static Task<UserInstrumentVm> SearchForUsers(ApplicationDbContext _context, string instrumentName, int genreId) 
         {
-           var users = from x in _context.UserInstruments.Include(y=>y.UserInstrumentGenres).Include(x => x.Instrument).Include(x=>x.ApplicationUser)
+           var users = from x in _context.UserInstruments.Include(y=>y.UserInstrumentGenres)
+            .Include(x => x.Instrument).Include(x=>x.ApplicationUser)
                         select x;
 
             var genres = from x in _context.UserInstrumentGenres.Include(y=>y.Genre)
