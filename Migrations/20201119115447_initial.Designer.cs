@@ -9,8 +9,8 @@ using MusicDating.Data;
 namespace MusicDating.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201113122332_userinstruments")]
-    partial class userinstruments
+    [Migration("20201119115447_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -93,9 +93,9 @@ namespace MusicDating.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bc12a777-0aed-4c54-8b15-75c478937bf4",
+                            Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "820fad0e-adee-4977-840d-3aede56c10ec",
+                            ConcurrencyStamp = "b8ccaaf5-f17b-4374-af62-3263bc1daa36",
                             DateCreated = new DateTime(2020, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "daniel@daniel.dk",
                             EmailConfirmed = false,
@@ -103,15 +103,15 @@ namespace MusicDating.Migrations
                             LastName = "Something",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9f5eb2ca-30a2-4982-a9c2-2d4609ae7bfa",
+                            SecurityStamp = "2e1046e0-7686-4b52-8f39-9c33c8558e13",
                             TwoFactorEnabled = false,
                             UserName = "daniel@daniel.dk"
                         },
                         new
                         {
-                            Id = "6e2ef46b-5927-48d4-ba4f-95f34e8a0dcb",
+                            Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b13cafa-8a02-4321-b496-b892475d099c",
+                            ConcurrencyStamp = "7f160478-aa57-4ae2-bddc-ea83176efaca",
                             DateCreated = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "simone@simone.dk",
                             EmailConfirmed = false,
@@ -119,7 +119,7 @@ namespace MusicDating.Migrations
                             LastName = "Something else",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "038c10e3-b96c-48c8-a4f7-c2caed1b7d10",
+                            SecurityStamp = "20705142-783c-425c-a976-c077b726f2de",
                             TwoFactorEnabled = false,
                             UserName = "simone@simone.dk"
                         });
@@ -380,6 +380,23 @@ namespace MusicDating.Migrations
                     b.HasKey("InstrumentId");
 
                     b.ToTable("Instruments");
+
+                    b.HasData(
+                        new
+                        {
+                            InstrumentId = 7,
+                            Name = "Violin"
+                        },
+                        new
+                        {
+                            InstrumentId = 8,
+                            Name = "Guitar"
+                        },
+                        new
+                        {
+                            InstrumentId = 9,
+                            Name = "Piano"
+                        });
                 });
 
             modelBuilder.Entity("MusicDating.Models.Entities.UserInstrument", b =>
@@ -398,6 +415,74 @@ namespace MusicDating.Migrations
                     b.HasIndex("InstrumentId");
 
                     b.ToTable("UserInstruments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            InstrumentId = 7,
+                            Level = 3
+                        },
+                        new
+                        {
+                            Id = "1",
+                            InstrumentId = 8,
+                            Level = 5
+                        },
+                        new
+                        {
+                            Id = "1",
+                            InstrumentId = 9,
+                            Level = 2
+                        });
+                });
+
+            modelBuilder.Entity("MusicDating.Models.Entities.UserInstrumentGenre", b =>
+                {
+                    b.Property<int>("UserInstrumentGenreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Id")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InstrumentId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("UserInstrumentGenreId");
+
+                    b.HasIndex("GenreId");
+
+                    b.HasIndex("Id", "InstrumentId");
+
+                    b.ToTable("UserInstrumentGenres");
+
+                    b.HasData(
+                        new
+                        {
+                            UserInstrumentGenreId = 1,
+                            GenreId = 1,
+                            Id = "1",
+                            InstrumentId = 7
+                        },
+                        new
+                        {
+                            UserInstrumentGenreId = 2,
+                            GenreId = 2,
+                            Id = "1",
+                            InstrumentId = 7
+                        },
+                        new
+                        {
+                            UserInstrumentGenreId = 3,
+                            GenreId = 2,
+                            Id = "1",
+                            InstrumentId = 8
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -486,6 +571,21 @@ namespace MusicDating.Migrations
                     b.HasOne("MusicDating.Models.Entities.Instrument", "Instrument")
                         .WithMany("UserInstruments")
                         .HasForeignKey("InstrumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MusicDating.Models.Entities.UserInstrumentGenre", b =>
+                {
+                    b.HasOne("MusicDating.Models.Entities.Genre", "Genre")
+                        .WithMany("UserInstrumentsGenres")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MusicDating.Models.Entities.UserInstrument", "UserInstrument")
+                        .WithMany("UserInstrumentsGenres")
+                        .HasForeignKey("Id", "InstrumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

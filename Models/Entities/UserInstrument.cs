@@ -13,11 +13,14 @@ namespace MusicDating.Models.Entities
     
         public int Level { get; set; }
 
+<<<<<<< HEAD
 
         public ICollection<UserInstrumentGenre> UserInstrumentGenres { get; set; }
 
 
         
+=======
+        public ICollection<UserInstrumentGenre> UserInstrumentsGenres { get; set; }   
+>>>>>>> development
     }
-    
 }

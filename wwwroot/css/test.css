@@ -1,3 +1,46 @@
 /* a {
     color:red !important;
   } */
+
+  body{
+    color: #353A5D;
+  }
+
+  .header-text {
+    font-size: 10pt;
+    
+    font-family: 'Montserrat';
+  }
+
+  .header-title {
+    color: #BF1E2E;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Oswald';
+  }
+
+  .page-title {
+    font-size: 30pt;
+    font-weight: 600;
+    font-family: 'Oswald';
+  }
+
+  .footer {
+    line-height: 30px !important;
+    background-color: #BF1E2E;
+    color: #FFFFFF !important;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'Montserrat';
+  }
+  .footer a {
+    color: #FFFFFF !important;
+  }
+
+  .margin {
+    margin-bottom: 20px;
+  }
+
+  .margin-right {
+    margin-right: 10px;
+  }

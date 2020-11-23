@@ -7,6 +7,7 @@ namespace MusicDating.Models.Entities {
 
 
         public ICollection<GenreEnsemble> GenreEnsembles { get; set; }
+        public ICollection<UserInstrumentGenre> UserInstrumentsGenres { get; set; } 
 
         public ICollection<UserInstrumentGenre> UserInstrumentGenres { get; set; }
 

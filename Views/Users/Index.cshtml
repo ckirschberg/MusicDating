@@ -7,40 +7,53 @@
 
 
 
-<h1>Index</h1>
+<div class="page-title">Find musiker</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 
 @using (Html.BeginForm("Index", "Users", FormMethod.Post))
-{
+{ 
 <div class="form-group">
     <select asp-for="InstrumentName" class ="form-control" asp-items="Model.Instruments" onchange="this.form.submit()">
         <option value="">Select instrument</option>
     </select>
 </div>
+<div class="form-group">
+    <select asp-for="GenreId" class ="form-control" asp-items="Model.Genres" onchange="this.form.submit()">
+        <option value="">Select genre</option>
+    </select>
+</div>
+
 }
 
 
-<div class="container">
+<div class="container pre-scrollable"> 
     <div class="row">
-@foreach (var item in Model.UserInstruments) {
+        @foreach (var item in Model.ApplicationUsers) {
         <div class="card col col-12 col-md-6">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
                     <h5 class="card-title">
-                        @item.ApplicationUser.FirstName @item.ApplicationUser.LastName
+                        @item.FirstName @item.LastName
                     </h5>
                     <a href="#" class="btn btn-secondary">Vis profil</a>
                 </div>
-                <div class="card-text d-flex justify-content-between">
-                    <h5 class="">@item.Instrument.Name)</h5>
-                    <div class="">
-                        <div>
-                            <h6>Erfaring <span class="badge badge-primary">@Html.DisplayFor(modelItem => item.Level)</span></h6>
+                <div class="card-text">
+                    @foreach (var userInstrument in item.UserInstruments){
+                    <div class="d-flex justify-content-between">
+                        <h5 class="">@userInstrument.Instrument.Name</h5>
+                        <div class="">
+                            <div>
+                                <h6>Erfaring <span class="badge badge-primary">@userInstrument.Level</span></h6>
+                            </div>
                         </div>
                     </div>
+                    <div>
+                        @foreach (var genre in userInstrument.UserInstrumentsGenres)
+                        {
+                            <span class="badge badge-secondary">@genre.Genre.Name</span>
+                        }
+                    </div>
+                    }
                 </div>
             </div>
         </div>           
