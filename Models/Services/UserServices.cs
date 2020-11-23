@@ -14,9 +14,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace MusicDating.Models.Services
 {
     public class UserServices {
-        public async static Task<UserInstrumentVm> SearchForUsers(ApplicationDbContext _context, string instrumentName, int genreId) 
+
+        public async static Task<UserInstrumentVm> SearchForUsers(
+            ApplicationDbContext _context, string instrumentName, int genreId) 
         {
-//create a view model selectlist with instruments + userInstruments (users)
+            //create a view model selectlist with instruments + userInstruments (users)
 
             // I am showing all instruments in the database. Some of you found (only) the instruments that are in use by musicians.
 
@@ -29,9 +31,6 @@ namespace MusicDating.Models.Services
                         .ThenInclude(y=>y.UserInstrumentsGenres).ThenInclude(y=>y.Genre)
                         .Include(y=>y.UserInstruments).ThenInclude(x => x.Instrument)
                         select x;
-
-
-
 
             if (!String.IsNullOrEmpty(instrumentName)) {
                 users = from u in users
