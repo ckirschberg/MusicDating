@@ -93,11 +93,7 @@ namespace MusicDating.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "d6f0d856-f63b-4657-8de0-44ad693f70b5",
-=======
                             ConcurrencyStamp = "b8ccaaf5-f17b-4374-af62-3263bc1daa36",
->>>>>>> development
                             DateCreated = new DateTime(2020, 12, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "daniel@daniel.dk",
                             EmailConfirmed = false,
@@ -105,11 +101,7 @@ namespace MusicDating.Migrations
                             LastName = "Something",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-<<<<<<< HEAD
-                            SecurityStamp = "2ef45e92-a94d-4063-aa9f-2dbf5b0b0cb6",
-=======
                             SecurityStamp = "2e1046e0-7686-4b52-8f39-9c33c8558e13",
->>>>>>> development
                             TwoFactorEnabled = false,
                             UserName = "daniel@daniel.dk"
                         },
@@ -117,11 +109,7 @@ namespace MusicDating.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-<<<<<<< HEAD
-                            ConcurrencyStamp = "7ae3e3d8-73b4-4017-9ecc-734360c0699c",
-=======
                             ConcurrencyStamp = "7f160478-aa57-4ae2-bddc-ea83176efaca",
->>>>>>> development
                             DateCreated = new DateTime(2020, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "simone@simone.dk",
                             EmailConfirmed = false,
@@ -129,11 +117,7 @@ namespace MusicDating.Migrations
                             LastName = "Something else",
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-<<<<<<< HEAD
-                            SecurityStamp = "50576ec4-3cdd-40a9-b3cb-9e531e674bb4",
-=======
                             SecurityStamp = "20705142-783c-425c-a976-c077b726f2de",
->>>>>>> development
                             TwoFactorEnabled = false,
                             UserName = "simone@simone.dk"
                         });
@@ -461,10 +445,7 @@ namespace MusicDating.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Id")
-<<<<<<< HEAD
-=======
                         .IsRequired()
->>>>>>> development
                         .HasColumnType("TEXT");
 
                     b.Property<int>("InstrumentId")
@@ -477,8 +458,6 @@ namespace MusicDating.Migrations
                     b.HasIndex("Id", "InstrumentId");
 
                     b.ToTable("UserInstrumentGenres");
-<<<<<<< HEAD
-=======
 
                     b.HasData(
                         new
@@ -502,7 +481,6 @@ namespace MusicDating.Migrations
                             Id = "1",
                             InstrumentId = 8
                         });
->>>>>>> development
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -598,25 +576,16 @@ namespace MusicDating.Migrations
             modelBuilder.Entity("MusicDating.Models.Entities.UserInstrumentGenre", b =>
                 {
                     b.HasOne("MusicDating.Models.Entities.Genre", "Genre")
-<<<<<<< HEAD
-                        .WithMany("UserInstrumentGenres")
-=======
                         .WithMany("UserInstrumentsGenres")
->>>>>>> development
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MusicDating.Models.Entities.UserInstrument", "UserInstrument")
-<<<<<<< HEAD
-                        .WithMany("UserInstrumentGenres")
-                        .HasForeignKey("Id", "InstrumentId");
-=======
                         .WithMany("UserInstrumentsGenres")
                         .HasForeignKey("Id", "InstrumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
->>>>>>> development
                 });
 #pragma warning restore 612, 618
         }
